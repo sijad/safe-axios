@@ -1,9 +1,9 @@
 {
   "name": "safe-axios",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a drop replacement to prevent ssrf and toctou requests",
-  "main": "main/index.js",
-  "types": "main/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "",
     "lint": "eslint --fix 'src/**/*.ts'",
