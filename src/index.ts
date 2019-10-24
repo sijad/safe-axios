@@ -62,8 +62,6 @@ const safeAxios = {
       baseURL,
     );
 
-    console.log(protocol);
-
     if (protocol !== 'http:' && protocol !== 'https:') {
       throw new Error('url is invalid');
     }
@@ -82,7 +80,7 @@ const safeAxios = {
       ...config,
       url: pathname,
       params: {
-        ...searchParams,
+        ...Object.fromEntries(searchParams),
         ...params,
       },
       baseURL: `${protocol}//${ip}`,
