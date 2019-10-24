@@ -55,11 +55,16 @@ const safeAxios = {
   async request<T = any, R = AxiosResponse<T>>(
     config: AxiosRequestConfig,
   ): Promise<R> {
-    const { url, baseURL, headers } = config;
+    const { url, baseURL, headers, params } = config;
 
-    const { hostname, protocol, pathname } = new URL(url || '', baseURL);
+    const { hostname, protocol, pathname, searchParams } = new URL(
+      url || '',
+      baseURL,
+    );
 
-    if (protocol !== 'http://' && protocol !== 'https://') {
+    console.log(protocol);
+
+    if (protocol !== 'http:' && protocol !== 'https:') {
       throw new Error('url is invalid');
     }
 
@@ -73,16 +78,13 @@ const safeAxios = {
       throw new Error('hostname is not valid');
     }
 
-    if (
-      typeof url !== 'string' ||
-      (!url.startsWith('http://') && !url.startsWith('https://'))
-    ) {
-      throw new Error('url is invalid');
-    }
-
     return await Axios.request<T, R>({
       ...config,
       url: pathname,
+      params: {
+        ...searchParams,
+        ...params,
+      },
       baseURL: `${protocol}//${ip}`,
       headers: {
         ...headers,
