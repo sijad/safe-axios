@@ -1,2 +1,6 @@
 src
 tsconfig.json
+.editorconfig
+.eslintrc.json
+.gitignore
+.prettierrc
